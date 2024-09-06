@@ -54,7 +54,7 @@ class MathGameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "primaryBackground")
         setupGameUI()
         generateAnswers()  // Начальная генерация примеров
     }

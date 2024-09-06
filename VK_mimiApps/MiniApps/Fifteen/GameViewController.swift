@@ -16,8 +16,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white  // Сделаем фон белым, чтобы не было черного экрана
+        view.backgroundColor = UIColor(named: "primaryBackground")
         setupUI()
         setupCollectionView()
         updateMovesLabel()  // Обновляем счетчик ходов при старте

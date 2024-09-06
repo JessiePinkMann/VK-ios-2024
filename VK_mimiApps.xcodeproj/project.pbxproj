@@ -23,6 +23,8 @@
 		4FC42C762C8A16E700CFA06E /* TokenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C752C8A16E700CFA06E /* TokenCollectionViewCell.swift */; };
 		4FC42C782C8A16F900CFA06E /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C772C8A16F900CFA06E /* GameViewModel.swift */; };
 		4FC42C7A2C8A171000CFA06E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C792C8A171000CFA06E /* Token.swift */; };
+		4FC42C7D2C8B34E500CFA06E /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C7C2C8B34E500CFA06E /* TicTacToeViewController.swift */; };
+		4FC42C7F2C8B356700CFA06E /* TicTacToeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C7E2C8B356700CFA06E /* TicTacToeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		4FC42C752C8A16E700CFA06E /* TokenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCollectionViewCell.swift; sourceTree = "<group>"; };
 		4FC42C772C8A16F900CFA06E /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		4FC42C792C8A171000CFA06E /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		4FC42C7C2C8B34E500CFA06E /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
+		4FC42C7E2C8B356700CFA06E /* TicTacToeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 		4FC42C642C89FF7000CFA06E /* MiniApps */ = {
 			isa = PBXGroup;
 			children = (
+				4FC42C7B2C8B2C5100CFA06E /* TicTacToe */,
 				4FC42C6A2C8A15D100CFA06E /* Fifteen */,
 				4FC42C652C89FF8700CFA06E /* MathGame */,
 			);
@@ -119,6 +124,15 @@
 				4FC42C792C8A171000CFA06E /* Token.swift */,
 			);
 			path = Fifteen;
+			sourceTree = "<group>";
+		};
+		4FC42C7B2C8B2C5100CFA06E /* TicTacToe */ = {
+			isa = PBXGroup;
+			children = (
+				4FC42C7C2C8B34E500CFA06E /* TicTacToeViewController.swift */,
+				4FC42C7E2C8B356700CFA06E /* TicTacToeCell.swift */,
+			);
+			path = TicTacToe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +211,8 @@
 				4FC42C762C8A16E700CFA06E /* TokenCollectionViewCell.swift in Sources */,
 				4FC42C742C8A16D300CFA06E /* GameViewController.swift in Sources */,
 				4FC42C7A2C8A171000CFA06E /* Token.swift in Sources */,
+				4FC42C7D2C8B34E500CFA06E /* TicTacToeViewController.swift in Sources */,
+				4FC42C7F2C8B356700CFA06E /* TicTacToeCell.swift in Sources */,
 				4FC42C782C8A16F900CFA06E /* GameViewModel.swift in Sources */,
 				4FC42C4F2C89F1BF00CFA06E /* SceneDelegate.swift in Sources */,
 				4FC42C632C89F20700CFA06E /* MiniAppCell.swift in Sources */,

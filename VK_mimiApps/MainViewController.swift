@@ -18,9 +18,10 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "primaryBackground")
 
-        setupTableView()
-        setupButtons()
+        setupButtons()  // Сначала настраиваем кнопки
+        setupTableView()  // Потом таблицу
     }
 
     // Настройка таблицы
@@ -33,40 +34,54 @@ class MainViewController: UIViewController {
 
         view.addSubview(tableView)
 
-        // Авто-лейаут для таблицы
+        // Авто-лейаут для таблицы, начиная под кнопками
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),  // Поднимаем таблицу до самого верха
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),  // Таблица начинается под кнопками
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-        view.backgroundColor = .white
     }
 
     // Настройка кнопок для переключения между режимами
     private func setupButtons() {
+        // Создаем контейнер для кнопок
+        let buttonContainer = UIView()
+        buttonContainer.backgroundColor = UIColor(named: "primaryBackground")  // Задаем фон контейнеру
+        buttonContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(buttonContainer)
+        
+        // Создаем кнопки
         let buttonHalfMode = UIButton(type: .system)
         buttonHalfMode.setTitle("1/2 Mode", for: .normal)
         buttonHalfMode.addTarget(self, action: #selector(setHalfMode), for: .touchUpInside)
-
+        
         let buttonEighthMode = UIButton(type: .system)
         buttonEighthMode.setTitle("1/8 Mode", for: .normal)
         buttonEighthMode.addTarget(self, action: #selector(setEighthMode), for: .touchUpInside)
-
+        
         buttonHalfMode.translatesAutoresizingMaskIntoConstraints = false
         buttonEighthMode.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(buttonHalfMode)
-        view.addSubview(buttonEighthMode)
-
-        // Авто-лейаут для кнопок
+        // Добавляем кнопки в контейнер
+        buttonContainer.addSubview(buttonHalfMode)
+        buttonContainer.addSubview(buttonEighthMode)
+        
+        // Лейаут для контейнера кнопок
         NSLayoutConstraint.activate([
-            buttonHalfMode.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            buttonHalfMode.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-
-            buttonEighthMode.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            buttonEighthMode.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            buttonContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),  // Контейнер в самом верху
+            buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonContainer.heightAnchor.constraint(equalToConstant: 100)  // Высота контейнера
+        ])
+        
+        // Лейаут для кнопок внутри контейнера
+        NSLayoutConstraint.activate([
+            buttonHalfMode.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 20),  // Поднимаем кнопки
+            buttonHalfMode.leadingAnchor.constraint(equalTo: buttonContainer.leadingAnchor, constant: 20),
+            
+            buttonEighthMode.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 20),
+            buttonEighthMode.trailingAnchor.constraint(equalTo: buttonContainer.trailingAnchor, constant: -20)
         ])
     }
 
@@ -82,6 +97,7 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
 }
+
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -107,6 +123,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 with: "Fifteen Puzzle",
                 imageName: "FifteenImg",  // Имя изображения из ассетов
                 description: "\n Arrange the numbers in order by sliding them into the empty space. \n",
+                isInteractive: isInteractiveMode  // Интерактивность зависит от режима
+            )
+        }
+        // Пример для игры Tic Tac Toe
+        else if indexPath.row == 2 {
+            cell.configure(
+                with: "Tic Tac Toe",
+                imageName: "TicTacToeImg",  // Имя изображения из ассетов (например, "TicTacToeImg")
+                description: "\n Play a classic game of Tic Tac Toe against another player! \n",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
         }
@@ -141,6 +166,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 1 {
                 let fifteenGameVC = GameViewController()  // Инициализируем контроллер игры Fifteen Puzzle
                 navigationController?.pushViewController(fifteenGameVC, animated: true)
+            } else if indexPath.row == 2 {
+                let ticTacToeVC = TicTacToeViewController()  // Инициализируем контроллер игры Tic Tac Toe
+                navigationController?.pushViewController(ticTacToeVC, animated: true)
             } else {
                 print("Tapped on Mini App \(indexPath.row + 1)")
             }
@@ -149,4 +177,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
+
 }

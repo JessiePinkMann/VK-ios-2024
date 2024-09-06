@@ -4,7 +4,6 @@
 //
 //  Created by Egor Anoshin on 05.09.2024.
 //
-
 import UIKit
 
 class MiniAppCell: UITableViewCell {
@@ -37,11 +36,22 @@ class MiniAppCell: UITableViewCell {
         return button
     }()
     
+    private let descriptionContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.shadowColor = UIColor.black.cgColor  // Цвет тени
+        view.layer.shadowOpacity = 0.3  // Прозрачность тени
+        view.layer.shadowOffset = CGSize(width: 2, height: 2)  // Смещение тени
+        view.layer.shadowRadius = 4  // Радиус тени
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // Всплывающая подсказка для описания
     private let descriptionBubble: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .darkGray
-        label.textColor = .white
+        label.backgroundColor = UIColor(named: "primaryBubble")  // Применяем динамический цвет для подсказки
+        label.textColor = UIColor(named: "descriptionText")  // Цвет текста для подсказки
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         label.layer.cornerRadius = 10
@@ -49,6 +59,7 @@ class MiniAppCell: UITableViewCell {
         label.numberOfLines = 0
         label.alpha = 0  // Прячем подсказку по умолчанию
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -63,17 +74,22 @@ class MiniAppCell: UITableViewCell {
         contentView.addSubview(appImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(infoButton)
-        contentView.addSubview(descriptionBubble)
+        
+        // Добавляем контейнер и внутри него — всплывающую подсказку
+        contentView.addSubview(descriptionContainer)
+        descriptionContainer.addSubview(descriptionBubble)
 
         setupConstraints()
         
         // Настраиваем кнопку информации
         infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
         
-        // Скругляем углы всей ячейки
+        // Скругляем углы всей ячейки и устанавливаем цвет фона
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
+        contentView.backgroundColor = UIColor(named: "primaryBackground")  // Применяем динамический цвет для фона
     }
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -117,13 +133,19 @@ class MiniAppCell: UITableViewCell {
             infoButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
         
-        // Всплывающая подсказка сверху справа
+        // Всплывающая подсказка внутри контейнера
         NSLayoutConstraint.activate([
-            descriptionBubble.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -10),
-            descriptionBubble.bottomAnchor.constraint(equalTo: infoButton.topAnchor, constant: -5),
-            descriptionBubble.widthAnchor.constraint(lessThanOrEqualToConstant: 250)
+            descriptionContainer.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -10),
+            descriptionContainer.bottomAnchor.constraint(equalTo: infoButton.topAnchor, constant: -5),
+            descriptionContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
+            
+            descriptionBubble.leadingAnchor.constraint(equalTo: descriptionContainer.leadingAnchor),
+            descriptionBubble.trailingAnchor.constraint(equalTo: descriptionContainer.trailingAnchor),
+            descriptionBubble.topAnchor.constraint(equalTo: descriptionContainer.topAnchor),
+            descriptionBubble.bottomAnchor.constraint(equalTo: descriptionContainer.bottomAnchor)
         ])
     }
+
     
     // Показ/скрытие всплывающей подсказки
     @objc private func infoButtonTapped() {
