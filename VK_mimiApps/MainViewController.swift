@@ -4,6 +4,7 @@
 //
 //  Created by Egor Anoshin on 05.09.2024.
 //
+
 import UIKit
 
 class MainViewController: UIViewController {
@@ -85,19 +86,24 @@ class MainViewController: UIViewController {
         ])
     }
 
-    // Переключение в режим 1/2 (интерактивные ячейки)
+    // Переключение в режим 1/2 (интерактивные ячейки) с анимацией
     @objc func setHalfMode() {
         isInteractiveMode = true
-        tableView.reloadData()
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()  // Здесь мы применяем изменения с анимацией
+        }
     }
 
-    // Переключение в режим 1/8 (только просмотр)
+    // Переключение в режим 1/8 (только просмотр) с анимацией
     @objc func setEighthMode() {
         isInteractiveMode = false
-        tableView.reloadData()
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()  // Здесь мы применяем изменения с анимацией
+        }
     }
 }
-
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -130,11 +136,30 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         else if indexPath.row == 2 {
             cell.configure(
                 with: "Tic Tac Toe",
-                imageName: "TicTacToeImg",  // Имя изображения из ассетов (например, "TicTacToeImg")
+                imageName: "TicTacToeImg",  // Имя изображения из ассетов
                 description: "\n Play a classic game of Tic Tac Toe against another player! \n",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
         }
+        // Приложение Current City
+        else if indexPath.row == 3 {
+            cell.configure(
+                with: "Current City",
+                imageName: "CurrentCityImg",  // Имя изображения из ассетов
+                description: "\n Find out your current city and view it on the map! \n",
+                isInteractive: isInteractiveMode  // Интерактивность зависит от режима
+            )
+        }
+        // Приложение Weather
+        else if indexPath.row == 4 {
+            cell.configure(
+                with: "Weather",
+                imageName: "WeatherImg",  // Имя изображения из ассетов
+                description: "\n Get the current weather forecast for your location! \n",
+                isInteractive: isInteractiveMode  // Интерактивность зависит от режима
+            )
+        }
+        // Остальные мини-приложения
         else {
             cell.configure(
                 with: "Mini App \(indexPath.row + 1)",
@@ -169,6 +194,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 2 {
                 let ticTacToeVC = TicTacToeViewController()  // Инициализируем контроллер игры Tic Tac Toe
                 navigationController?.pushViewController(ticTacToeVC, animated: true)
+            } else if indexPath.row == 3 {
+                let currentCityVC = CurrentCityViewController()  // Инициализируем контроллер Current City
+                navigationController?.pushViewController(currentCityVC, animated: true)
+            } else if indexPath.row == 4 {
+                let weatherVC = WeatherViewController()  // Инициализируем контроллер Weather
+                navigationController?.pushViewController(weatherVC, animated: true)
             } else {
                 print("Tapped on Mini App \(indexPath.row + 1)")
             }
@@ -177,5 +208,4 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-
 }

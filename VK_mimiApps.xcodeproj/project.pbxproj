@@ -25,6 +25,14 @@
 		4FC42C7A2C8A171000CFA06E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C792C8A171000CFA06E /* Token.swift */; };
 		4FC42C7D2C8B34E500CFA06E /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C7C2C8B34E500CFA06E /* TicTacToeViewController.swift */; };
 		4FC42C7F2C8B356700CFA06E /* TicTacToeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C7E2C8B356700CFA06E /* TicTacToeCell.swift */; };
+		4FC42C822C8C7F5300CFA06E /* CurrentCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C812C8C7F5300CFA06E /* CurrentCityViewController.swift */; };
+		4FC42C852C8C84C500CFA06E /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C842C8C84C500CFA06E /* WeatherViewController.swift */; };
+		4FC42C872C8C8C4900CFA06E /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C862C8C8C4900CFA06E /* WeatherModel.swift */; };
+		4FC42C892C8C8C5E00CFA06E /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C882C8C8C5E00CFA06E /* WeatherService.swift */; };
+		4FC42C8B2C8C8CE300CFA06E /* CurrentCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C8A2C8C8CE300CFA06E /* CurrentCityModel.swift */; };
+		4FC42C8D2C8C8CFB00CFA06E /* CityLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C8C2C8C8CFB00CFA06E /* CityLocationService.swift */; };
+		4FC42C8F2C8C99A700CFA06E /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C8E2C8C99A700CFA06E /* TicTacToeModel.swift */; };
+		4FC42C912C8C9AAC00CFA06E /* MathGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C902C8C9AAC00CFA06E /* MathGameModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +56,14 @@
 		4FC42C792C8A171000CFA06E /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		4FC42C7C2C8B34E500CFA06E /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		4FC42C7E2C8B356700CFA06E /* TicTacToeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeCell.swift; sourceTree = "<group>"; };
+		4FC42C812C8C7F5300CFA06E /* CurrentCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCityViewController.swift; sourceTree = "<group>"; };
+		4FC42C842C8C84C500CFA06E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		4FC42C862C8C8C4900CFA06E /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		4FC42C882C8C8C5E00CFA06E /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		4FC42C8A2C8C8CE300CFA06E /* CurrentCityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCityModel.swift; sourceTree = "<group>"; };
+		4FC42C8C2C8C8CFB00CFA06E /* CityLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityLocationService.swift; sourceTree = "<group>"; };
+		4FC42C8E2C8C99A700CFA06E /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
+		4FC42C902C8C9AAC00CFA06E /* MathGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathGameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +111,8 @@
 		4FC42C642C89FF7000CFA06E /* MiniApps */ = {
 			isa = PBXGroup;
 			children = (
+				4FC42C832C8C83AB00CFA06E /* Weather */,
+				4FC42C802C8C7F4700CFA06E /* CurrentCity */,
 				4FC42C7B2C8B2C5100CFA06E /* TicTacToe */,
 				4FC42C6A2C8A15D100CFA06E /* Fifteen */,
 				4FC42C652C89FF8700CFA06E /* MathGame */,
@@ -107,6 +125,7 @@
 			children = (
 				4FC42C662C8A017300CFA06E /* MathGameViewController.swift */,
 				4FC42C682C8A018E00CFA06E /* AnswerButton.swift */,
+				4FC42C902C8C9AAC00CFA06E /* MathGameModel.swift */,
 			);
 			path = MathGame;
 			sourceTree = "<group>";
@@ -131,8 +150,29 @@
 			children = (
 				4FC42C7C2C8B34E500CFA06E /* TicTacToeViewController.swift */,
 				4FC42C7E2C8B356700CFA06E /* TicTacToeCell.swift */,
+				4FC42C8E2C8C99A700CFA06E /* TicTacToeModel.swift */,
 			);
 			path = TicTacToe;
+			sourceTree = "<group>";
+		};
+		4FC42C802C8C7F4700CFA06E /* CurrentCity */ = {
+			isa = PBXGroup;
+			children = (
+				4FC42C812C8C7F5300CFA06E /* CurrentCityViewController.swift */,
+				4FC42C8A2C8C8CE300CFA06E /* CurrentCityModel.swift */,
+				4FC42C8C2C8C8CFB00CFA06E /* CityLocationService.swift */,
+			);
+			path = CurrentCity;
+			sourceTree = "<group>";
+		};
+		4FC42C832C8C83AB00CFA06E /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				4FC42C842C8C84C500CFA06E /* WeatherViewController.swift */,
+				4FC42C862C8C8C4900CFA06E /* WeatherModel.swift */,
+				4FC42C882C8C8C5E00CFA06E /* WeatherService.swift */,
+			);
+			path = Weather;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,22 +244,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FC42C8F2C8C99A700CFA06E /* TicTacToeModel.swift in Sources */,
 				4FC42C512C89F1BF00CFA06E /* ViewController.swift in Sources */,
 				4FC42C722C8A16C900CFA06E /* TokenView.swift in Sources */,
 				4FC42C4D2C89F1BF00CFA06E /* AppDelegate.swift in Sources */,
+				4FC42C822C8C7F5300CFA06E /* CurrentCityViewController.swift in Sources */,
 				4FC42C702C8A16B200CFA06E /* ButtonView.swift in Sources */,
+				4FC42C912C8C9AAC00CFA06E /* MathGameModel.swift in Sources */,
 				4FC42C762C8A16E700CFA06E /* TokenCollectionViewCell.swift in Sources */,
 				4FC42C742C8A16D300CFA06E /* GameViewController.swift in Sources */,
 				4FC42C7A2C8A171000CFA06E /* Token.swift in Sources */,
 				4FC42C7D2C8B34E500CFA06E /* TicTacToeViewController.swift in Sources */,
 				4FC42C7F2C8B356700CFA06E /* TicTacToeCell.swift in Sources */,
+				4FC42C8B2C8C8CE300CFA06E /* CurrentCityModel.swift in Sources */,
 				4FC42C782C8A16F900CFA06E /* GameViewModel.swift in Sources */,
 				4FC42C4F2C89F1BF00CFA06E /* SceneDelegate.swift in Sources */,
 				4FC42C632C89F20700CFA06E /* MiniAppCell.swift in Sources */,
+				4FC42C892C8C8C5E00CFA06E /* WeatherService.swift in Sources */,
 				4FC42C692C8A018E00CFA06E /* AnswerButton.swift in Sources */,
+				4FC42C872C8C8C4900CFA06E /* WeatherModel.swift in Sources */,
+				4FC42C852C8C84C500CFA06E /* WeatherViewController.swift in Sources */,
 				4FC42C6E2C8A169400CFA06E /* TitleView.swift in Sources */,
 				4FC42C672C8A017300CFA06E /* MathGameViewController.swift in Sources */,
 				4FC42C612C89F1F500CFA06E /* MainViewController.swift in Sources */,
+				4FC42C8D2C8C8CFB00CFA06E /* CityLocationService.swift in Sources */,
 				4FC42C6C2C8A168500CFA06E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

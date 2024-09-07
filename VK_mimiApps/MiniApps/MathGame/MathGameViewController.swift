@@ -8,14 +8,8 @@ import UIKit
 
 class MathGameViewController: UIViewController {
     
-    // Логические переменные игры
-    var correctAnswer = 0
-    var choiceArray: [Int] = Array(repeating: 0, count: 9)
-    var firstNumber = 0
-    var secondNumber = 0
-    var thirdNumber = 0
-    var difficulty = 100
-    var score = 0
+    // Модель игры
+    private var gameModel = MathGameModel()  // Логика вынесена в модель
     
     // UI элементы
     private let equationLabel: UILabel = {
@@ -29,6 +23,7 @@ class MathGameViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
+        label.text = "Score: 0"
         return label
     }()
     
@@ -56,7 +51,8 @@ class MathGameViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "primaryBackground")
         setupGameUI()
-        generateAnswers()  // Начальная генерация примеров
+        gameModel.generateAnswers()  // Начальная генерация примеров
+        updateUI()
     }
 
     // Настройка интерфейса игры
@@ -65,11 +61,11 @@ class MathGameViewController: UIViewController {
         view.addSubview(equationLabel)
         equationLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            equationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),  // Центрируем ниже
+            equationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             equationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        // Добавляем кнопки
+        // Добавляем сетку с кнопками
         let gridStackView = UIStackView()
         gridStackView.axis = .vertical
         gridStackView.spacing = 10
@@ -85,39 +81,36 @@ class MathGameViewController: UIViewController {
             let rowStackView = UIStackView()
             rowStackView.axis = .horizontal
             rowStackView.spacing = 10
-            
             for columnIndex in 0..<3 {
                 let button = AnswerButton()
-                button.tag = rowIndex * 3 + columnIndex  // Индекс кнопки для дальнейшей логики
+                button.tag = rowIndex * 3 + columnIndex  // Индекс кнопки для логики
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
                 buttons.append(button)
                 rowStackView.addArrangedSubview(button)
             }
-            
             gridStackView.addArrangedSubview(rowStackView)
         }
         
-        // Добавляем label с очками
-        view.addSubview(scoreLabel)
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            scoreLabel.topAnchor.constraint(equalTo: gridStackView.bottomAnchor, constant: 20),
-            scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
         // Добавляем бегунок сложности и label для него
         view.addSubview(difficultyLabel)
-        difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            difficultyLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 20),
-            difficultyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
         view.addSubview(difficultySlider)
+        difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
+        difficultySlider.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            difficultyLabel.topAnchor.constraint(equalTo: gridStackView.bottomAnchor, constant: 20),
+            difficultyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             difficultySlider.topAnchor.constraint(equalTo: difficultyLabel.bottomAnchor, constant: 10),
             difficultySlider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             difficultySlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
+        ])
+        
+        // Добавляем label с очками под бегунком сложности
+        view.addSubview(scoreLabel)
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scoreLabel.topAnchor.constraint(equalTo: difficultySlider.bottomAnchor, constant: 20),
+            scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         // Добавляем таргет для изменения сложности
@@ -126,49 +119,24 @@ class MathGameViewController: UIViewController {
 
     // Логика изменения сложности
     @objc private func difficultyChanged(_ sender: UISlider) {
-        difficulty = Int(sender.value)
-        difficultyLabel.text = "Difficulty: \(difficulty)"
-        // Не генерируем новый пример сразу, только обновляем сложность
+        gameModel.difficulty = Int(sender.value)
+        difficultyLabel.text = "Difficulty: \(gameModel.difficulty)"
     }
 
     // Логика нажатия на кнопку
     @objc private func buttonTapped(_ sender: UIButton) {
         let index = sender.tag
-        answerIsCorrect(answer: choiceArray[index])
-        generateAnswers()  // Генерируем новый пример после ответа
-    }
-    
-    private func answerIsCorrect(answer: Int) {
-        if answer == correctAnswer {
-            score += 1
-        } else {
-            score -= 1
-        }
+        gameModel.answerIsCorrect(answer: gameModel.choiceArray[index])
+        gameModel.generateAnswers()
         updateUI()
     }
-    
-    // Генерация новых чисел и ответов
-    private func generateAnswers() {
-        firstNumber = Int.random(in: 0...(difficulty / 3))
-        secondNumber = Int.random(in: 0...(difficulty / 3))
-        thirdNumber = Int.random(in: 0...(difficulty / 3))
-        correctAnswer = firstNumber + secondNumber + thirdNumber
 
-        var answerList = [Int]()
-        for _ in 0..<8 {
-            answerList.append(Int.random(in: 0...difficulty))
-        }
-        answerList.append(correctAnswer)
-        choiceArray = answerList.shuffled()
-        updateUI()
-    }
-    
-    // Обновление интерфейса
+    // Обновление UI
     private func updateUI() {
-        equationLabel.text = "\(firstNumber) + \(secondNumber) + \(thirdNumber)"
+        equationLabel.text = "\(gameModel.firstNumber) + \(gameModel.secondNumber) + \(gameModel.thirdNumber)"
         for (index, button) in buttons.enumerated() {
-            button.setTitle("\(choiceArray[index])", for: .normal)
+            button.setTitle("\(gameModel.choiceArray[index])", for: .normal)
         }
-        scoreLabel.text = "Score: \(score)"
+        scoreLabel.text = "Score: \(gameModel.score)"
     }
 }
