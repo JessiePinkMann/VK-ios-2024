@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4FC42C4D2C89F1BF00CFA06E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C4C2C89F1BF00CFA06E /* AppDelegate.swift */; };
 		4FC42C4F2C89F1BF00CFA06E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C4E2C89F1BF00CFA06E /* SceneDelegate.swift */; };
-		4FC42C512C89F1BF00CFA06E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C502C89F1BF00CFA06E /* ViewController.swift */; };
 		4FC42C562C89F1C000CFA06E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC42C552C89F1C000CFA06E /* Assets.xcassets */; };
 		4FC42C612C89F1F500CFA06E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C602C89F1F500CFA06E /* MainViewController.swift */; };
 		4FC42C632C89F20700CFA06E /* MiniAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C622C89F20700CFA06E /* MiniAppCell.swift */; };
@@ -33,13 +32,13 @@
 		4FC42C8D2C8C8CFB00CFA06E /* CityLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C8C2C8C8CFB00CFA06E /* CityLocationService.swift */; };
 		4FC42C8F2C8C99A700CFA06E /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C8E2C8C99A700CFA06E /* TicTacToeModel.swift */; };
 		4FC42C912C8C9AAC00CFA06E /* MathGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C902C8C9AAC00CFA06E /* MathGameModel.swift */; };
+		4FC42C9F2C8E0D6A00CFA06E /* MiniAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC42C9E2C8E0D6A00CFA06E /* MiniAppData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4FC42C492C89F1BF00CFA06E /* VK_mimiApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_mimiApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC42C4C2C89F1BF00CFA06E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FC42C4E2C89F1BF00CFA06E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4FC42C502C89F1BF00CFA06E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4FC42C552C89F1C000CFA06E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FC42C5A2C89F1C000CFA06E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC42C602C89F1F500CFA06E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		4FC42C8C2C8C8CFB00CFA06E /* CityLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityLocationService.swift; sourceTree = "<group>"; };
 		4FC42C8E2C8C99A700CFA06E /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
 		4FC42C902C8C9AAC00CFA06E /* MathGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathGameModel.swift; sourceTree = "<group>"; };
+		4FC42C9E2C8E0D6A00CFA06E /* MiniAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniAppData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,13 +97,13 @@
 			isa = PBXGroup;
 			children = (
 				4FC42C642C89FF7000CFA06E /* MiniApps */,
+				4FC42CA52C8E161100CFA06E /* Resources */,
+				4FC42CA42C8E15EE00CFA06E /* Cells */,
+				4FC42CA62C8E163200CFA06E /* Models */,
 				4FC42C4C2C89F1BF00CFA06E /* AppDelegate.swift */,
 				4FC42C4E2C89F1BF00CFA06E /* SceneDelegate.swift */,
-				4FC42C502C89F1BF00CFA06E /* ViewController.swift */,
-				4FC42C552C89F1C000CFA06E /* Assets.xcassets */,
-				4FC42C5A2C89F1C000CFA06E /* Info.plist */,
 				4FC42C602C89F1F500CFA06E /* MainViewController.swift */,
-				4FC42C622C89F20700CFA06E /* MiniAppCell.swift */,
+				4FC42C5A2C89F1C000CFA06E /* Info.plist */,
 			);
 			path = VK_mimiApps;
 			sourceTree = "<group>";
@@ -173,6 +173,30 @@
 				4FC42C882C8C8C5E00CFA06E /* WeatherService.swift */,
 			);
 			path = Weather;
+			sourceTree = "<group>";
+		};
+		4FC42CA42C8E15EE00CFA06E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4FC42C622C89F20700CFA06E /* MiniAppCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4FC42CA52C8E161100CFA06E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FC42C552C89F1C000CFA06E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4FC42CA62C8E163200CFA06E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4FC42C9E2C8E0D6A00CFA06E /* MiniAppData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,7 +269,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC42C8F2C8C99A700CFA06E /* TicTacToeModel.swift in Sources */,
-				4FC42C512C89F1BF00CFA06E /* ViewController.swift in Sources */,
 				4FC42C722C8A16C900CFA06E /* TokenView.swift in Sources */,
 				4FC42C4D2C89F1BF00CFA06E /* AppDelegate.swift in Sources */,
 				4FC42C822C8C7F5300CFA06E /* CurrentCityViewController.swift in Sources */,
@@ -256,6 +279,7 @@
 				4FC42C7A2C8A171000CFA06E /* Token.swift in Sources */,
 				4FC42C7D2C8B34E500CFA06E /* TicTacToeViewController.swift in Sources */,
 				4FC42C7F2C8B356700CFA06E /* TicTacToeCell.swift in Sources */,
+				4FC42C9F2C8E0D6A00CFA06E /* MiniAppData.swift in Sources */,
 				4FC42C8B2C8C8CE300CFA06E /* CurrentCityModel.swift in Sources */,
 				4FC42C782C8A16F900CFA06E /* GameViewModel.swift in Sources */,
 				4FC42C4F2C89F1BF00CFA06E /* SceneDelegate.swift in Sources */,

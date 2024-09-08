@@ -12,7 +12,7 @@ class TokenCollectionViewCell: UICollectionViewCell {
     static let identifier = "TokenCollectionViewCell"
     
     private let tokenView: TokenView = {
-        let view = TokenView(token: Token(id: 0, number: 0, isEmpty: true))  // Пустой токен по умолчанию
+        let view = TokenView(token: Token(id: 0, number: 0, isEmpty: true))
         return view
     }()
     

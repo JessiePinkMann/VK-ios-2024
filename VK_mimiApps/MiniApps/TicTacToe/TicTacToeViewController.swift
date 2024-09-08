@@ -10,9 +10,9 @@ import UIKit
 class TicTacToeViewController: UIViewController {
 
     private var collectionView: UICollectionView!
-    private var currentPlayer = "X"  // Начинаем с крестиков
+    private var currentPlayer = "X"
     private var gameIsActive = true
-    private var boardState = Array(repeating: "", count: 9)  // Состояние поля 3x3
+    private var boardState = Array(repeating: "", count: 9)
     
     private let turnIndicatorLabel: UILabel = {
         let label = UILabel()

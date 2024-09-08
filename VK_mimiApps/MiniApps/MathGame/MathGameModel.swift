@@ -16,7 +16,6 @@ class MathGameModel {
     var difficulty = 100
     var score = 0
 
-    // Проверка правильного ответа
     func answerIsCorrect(answer: Int) {
         if answer == correctAnswer {
             score += 1
@@ -25,7 +24,6 @@ class MathGameModel {
         }
     }
 
-    // Генерация новых чисел и ответов
     func generateAnswers() {
         firstNumber = Int.random(in: 0...(difficulty / 3))
         secondNumber = Int.random(in: 0...(difficulty / 3))

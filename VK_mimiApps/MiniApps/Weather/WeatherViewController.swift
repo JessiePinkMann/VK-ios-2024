@@ -5,14 +5,14 @@
 //  Created by Egor Anoshin on 07.09.2024.
 //
 
-// WeatherViewController.swift
+
 import UIKit
 import CoreLocation
 
 class WeatherViewController: UIViewController {
 
-    private let locationManager = CLLocationManager()  // Для получения геолокации
-    private let weatherService = WeatherService()      // Сервис для работы с API
+    private let locationManager = CLLocationManager()
+    private let weatherService = WeatherService()
     
     private let weatherLabel: UILabel = {
         let label = UILabel()
@@ -33,7 +33,7 @@ class WeatherViewController: UIViewController {
         setupLocationManager()
     }
 
-    // Настройка расположения лейбла
+    
     private func setupLayout() {
         NSLayoutConstraint.activate([
             weatherLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -43,7 +43,7 @@ class WeatherViewController: UIViewController {
         ])
     }
 
-    // Настройка менеджера геолокации
+    
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -51,7 +51,7 @@ class WeatherViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
 
-    // Обновление интерфейса на основе полученных данных о погоде
+    
     private func updateWeatherUI(with weatherResponse: WeatherResponse) {
         let city = weatherResponse.name
         let temperature = weatherResponse.main.temp
@@ -64,16 +64,15 @@ class WeatherViewController: UIViewController {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
+
 extension WeatherViewController: CLLocationManagerDelegate {
-    // Обработка обновления местоположения
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            locationManager.stopUpdatingLocation()  // Останавливаем обновление локации
+            locationManager.stopUpdatingLocation()
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
             
-            // Вызов API для получения данных о погоде
             weatherService.fetchWeather(latitude: latitude, longitude: longitude) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
@@ -87,7 +86,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
         }
     }
     
-    // Обработка ошибок геолокации
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error fetching location: \(error)")
         weatherLabel.text = "Failed to get location."

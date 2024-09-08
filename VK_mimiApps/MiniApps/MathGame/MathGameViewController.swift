@@ -8,10 +8,8 @@ import UIKit
 
 class MathGameViewController: UIViewController {
     
-    // Модель игры
-    private var gameModel = MathGameModel()  // Логика вынесена в модель
+    private var gameModel = MathGameModel()
     
-    // UI элементы
     private let equationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
@@ -29,12 +27,11 @@ class MathGameViewController: UIViewController {
     
     private var buttons: [AnswerButton] = []
     
-    // Бегунок сложности
     private let difficultySlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 10
         slider.maximumValue = 200
-        slider.value = 100  // Стартовое значение сложности
+        slider.value = 100
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -51,13 +48,11 @@ class MathGameViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "primaryBackground")
         setupGameUI()
-        gameModel.generateAnswers()  // Начальная генерация примеров
+        gameModel.generateAnswers()
         updateUI()
     }
 
-    // Настройка интерфейса игры
     private func setupGameUI() {
-        // Добавляем label с уравнением
         view.addSubview(equationLabel)
         equationLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -65,7 +60,6 @@ class MathGameViewController: UIViewController {
             equationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        // Добавляем сетку с кнопками
         let gridStackView = UIStackView()
         gridStackView.axis = .vertical
         gridStackView.spacing = 10
@@ -83,7 +77,7 @@ class MathGameViewController: UIViewController {
             rowStackView.spacing = 10
             for columnIndex in 0..<3 {
                 let button = AnswerButton()
-                button.tag = rowIndex * 3 + columnIndex  // Индекс кнопки для логики
+                button.tag = rowIndex * 3 + columnIndex
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
                 buttons.append(button)
                 rowStackView.addArrangedSubview(button)
@@ -91,7 +85,6 @@ class MathGameViewController: UIViewController {
             gridStackView.addArrangedSubview(rowStackView)
         }
         
-        // Добавляем бегунок сложности и label для него
         view.addSubview(difficultyLabel)
         view.addSubview(difficultySlider)
         difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +98,6 @@ class MathGameViewController: UIViewController {
             difficultySlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
         ])
         
-        // Добавляем label с очками под бегунком сложности
         view.addSubview(scoreLabel)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -113,17 +105,14 @@ class MathGameViewController: UIViewController {
             scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        // Добавляем таргет для изменения сложности
         difficultySlider.addTarget(self, action: #selector(difficultyChanged(_:)), for: .valueChanged)
     }
 
-    // Логика изменения сложности
     @objc private func difficultyChanged(_ sender: UISlider) {
         gameModel.difficulty = Int(sender.value)
         difficultyLabel.text = "Difficulty: \(gameModel.difficulty)"
     }
 
-    // Логика нажатия на кнопку
     @objc private func buttonTapped(_ sender: UIButton) {
         let index = sender.tag
         gameModel.answerIsCorrect(answer: gameModel.choiceArray[index])
@@ -131,7 +120,6 @@ class MathGameViewController: UIViewController {
         updateUI()
     }
 
-    // Обновление UI
     private func updateUI() {
         equationLabel.text = "\(gameModel.firstNumber) + \(gameModel.secondNumber) + \(gameModel.thirdNumber)"
         for (index, button) in buttons.enumerated() {

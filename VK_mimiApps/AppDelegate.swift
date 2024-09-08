@@ -11,8 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    // Этот метод вызывается при запуске приложения
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -21,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    // Это нужно для поддержки нескольких сцен на устройствах с iOS 13+
     func application(
         _ application: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,

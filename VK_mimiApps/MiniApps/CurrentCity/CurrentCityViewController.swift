@@ -23,9 +23,9 @@ class CurrentCityViewController: UIViewController {
     
     private var mapView: MKMapView = {
         let map = MKMapView()
-        map.layer.cornerRadius = 20  // Скругляем углы карты
-        map.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]  // Скругляем только верхние углы
-        map.clipsToBounds = true  // Чтобы не было "вылезания" карты за границы
+        map.layer.cornerRadius = 20
+        map.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        map.clipsToBounds = true
         map.translatesAutoresizingMaskIntoConstraints = false
         return map
     }()
@@ -41,13 +41,13 @@ class CurrentCityViewController: UIViewController {
         setupLocationService()
     }
     
-    // Настройка сервиса геолокации
+    
     private func setupLocationService() {
         cityLocationService.onCityFound = { [weak self] city, coordinates in
             DispatchQueue.main.async {
                 self?.cityLabel.text = "Your current city is: \(city.name)"
                 
-                // Обновляем карту, устанавливаем регион
+    
                 let region = MKCoordinateRegion(center: coordinates, latitudinalMeters: 10000, longitudinalMeters: 10000)
                 self?.mapView.setRegion(region, animated: true)
             }
@@ -62,7 +62,6 @@ class CurrentCityViewController: UIViewController {
         cityLocationService.requestLocation()
     }
     
-    // Настройка лейаута
     private func setupLayout() {
         NSLayoutConstraint.activate([
             cityLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),

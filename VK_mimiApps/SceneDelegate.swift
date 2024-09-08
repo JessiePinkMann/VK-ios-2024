@@ -18,11 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        // Создаем окно и назначаем корневой ViewController
         window = UIWindow(windowScene: windowScene)
         let mainViewController = MainViewController()
         
-        // Упаковываем в UINavigationController
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
         window?.rootViewController = navigationController

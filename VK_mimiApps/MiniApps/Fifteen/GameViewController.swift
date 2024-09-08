@@ -11,15 +11,15 @@ class GameViewController: UIViewController {
     
     private let viewModel = GameViewModel()
     private var collectionView: UICollectionView!
-    private let movesLabel = UILabel()  // Лейбл для отображения количества ходов
-    private let restartButton = UIButton(type: .system)  // Кнопка Restart
+    private let movesLabel = UILabel()
+    private let restartButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "primaryBackground")
         setupUI()
         setupCollectionView()
-        updateMovesLabel()  // Обновляем счетчик ходов при старте
+        updateMovesLabel()
     }
     
     private func setupUI() {
@@ -32,14 +32,12 @@ class GameViewController: UIViewController {
         view.addSubview(movesLabel)
         movesLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        // Настройка кнопки Restart
         restartButton.setTitle("Restart", for: .normal)
         restartButton.titleLabel?.font = UIFont.systemFont(ofSize: Constants.smallTitle, weight: .bold)
         restartButton.addTarget(self, action: #selector(restartGame), for: .touchUpInside)
         view.addSubview(restartButton)
         restartButton.translatesAutoresizingMaskIntoConstraints = false
         
-        // Настройка констрейнтов для всех элементов
         NSLayoutConstraint.activate([
             titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.padding),
             titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -52,7 +50,6 @@ class GameViewController: UIViewController {
         ])
     }
     
-    // Настройка коллекции для токенов
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = Constants.spacing
@@ -64,12 +61,11 @@ class GameViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .clear  // Чтобы фон коллекции не был черным
+        collectionView.backgroundColor = .clear
         collectionView.register(TokenCollectionViewCell.self, forCellWithReuseIdentifier: TokenCollectionViewCell.identifier)
         
         view.addSubview(collectionView)
         
-        // Настройка констрейнтов для коллекции
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: movesLabel.bottomAnchor, constant: Constants.padding),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.padding),
@@ -78,23 +74,20 @@ class GameViewController: UIViewController {
         ])
     }
     
-    // Обновляем текст лейбла с количеством ходов
     private func updateMovesLabel() {
         movesLabel.text = "Moves made: \(viewModel.movesCount)"
     }
     
-    // Перезапуск игры по нажатию кнопки Restart
     @objc private func restartGame() {
         viewModel.startGames()
         collectionView.reloadData()
-        updateMovesLabel()  // Обновляем счетчик ходов
+        updateMovesLabel()
     }
     
-    // Показ алерта по завершении игры
     private func showGameOverAlert() {
         let alert = UIAlertController(title: "Congratulations!", message: "You completed the puzzle in \(viewModel.movesCount) moves!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            self.restartGame()  // Перезапуск игры после завершения
+            self.restartGame()
         }))
         present(alert, animated: true, completion: nil)
     }
@@ -116,13 +109,12 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let token = viewModel.tokens[indexPath.item]
         viewModel.move(token: token)
-        updateMovesLabel()  // Обновляем количество ходов при перемещении
+        updateMovesLabel()
         collectionView.reloadData()
         
-        // Проверяем, завершена ли игра
         if viewModel.isGameFinished() {
-            print("Game finished!")  // Отладочный вывод
-            showGameOverAlert()  // Показываем сообщение о победе
+            print("Game finished!")
+            showGameOverAlert()
         }
     }
 }

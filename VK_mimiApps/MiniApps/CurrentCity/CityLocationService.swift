@@ -21,18 +21,15 @@ class CityLocationService: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    // Запросить разрешение и начать обновление геолокации
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    // CLLocationManagerDelegate метод для обновления локации
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             locationManager.stopUpdatingLocation()
             
-            // Обратное геокодирование
             geocoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "en_US")) { [weak self] placemarks, error in
                 if let error = error {
                     self?.onError?(error)
@@ -51,7 +48,6 @@ class CityLocationService: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    // Обработка ошибок геолокации
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         onError?(error)
     }
