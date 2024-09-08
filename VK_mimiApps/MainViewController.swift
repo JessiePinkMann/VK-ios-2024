@@ -32,6 +32,11 @@ class MainViewController: UIViewController {
         tableView.register(MiniAppCell.self, forCellReuseIdentifier: MiniAppCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10))
+        headerView.backgroundColor = .clear
+        tableView.tableHeaderView = headerView
+
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
@@ -50,10 +55,12 @@ class MainViewController: UIViewController {
 
         let buttonHalfMode = UIButton(type: .system)
         buttonHalfMode.setTitle("1/2 Mode", for: .normal)
+        buttonHalfMode.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         buttonHalfMode.addTarget(self, action: #selector(setHalfMode), for: .touchUpInside)
 
         let buttonEighthMode = UIButton(type: .system)
         buttonEighthMode.setTitle("1/8 Mode", for: .normal)
+        buttonEighthMode.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         buttonEighthMode.addTarget(self, action: #selector(setEighthMode), for: .touchUpInside)
 
         buttonHalfMode.translatesAutoresizingMaskIntoConstraints = false
@@ -70,10 +77,10 @@ class MainViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            buttonHalfMode.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 20),
-            buttonHalfMode.leadingAnchor.constraint(equalTo: buttonContainer.leadingAnchor, constant: 20),
-            buttonEighthMode.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 20),
-            buttonEighthMode.trailingAnchor.constraint(equalTo: buttonContainer.trailingAnchor, constant: -20)
+            buttonHalfMode.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 30),
+            buttonHalfMode.leadingAnchor.constraint(equalTo: buttonContainer.leadingAnchor, constant: 30),
+            buttonEighthMode.topAnchor.constraint(equalTo: buttonContainer.topAnchor, constant: 30),
+            buttonEighthMode.trailingAnchor.constraint(equalTo: buttonContainer.trailingAnchor, constant: -30)
         ])
     }
 
