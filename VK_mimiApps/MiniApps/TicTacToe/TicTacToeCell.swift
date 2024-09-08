@@ -38,5 +38,6 @@ class TicTacToeCell: UICollectionViewCell {
     
     func configure(with symbol: String) {
         symbolLabel.text = symbol
+        symbolLabel.textColor = UIColor.label
     }
 }

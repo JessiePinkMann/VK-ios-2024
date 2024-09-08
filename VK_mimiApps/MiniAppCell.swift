@@ -4,6 +4,7 @@
 //
 //  Created by Egor Anoshin on 05.09.2024.
 //
+
 import UIKit
 
 class MiniAppCell: UITableViewCell {
@@ -11,7 +12,7 @@ class MiniAppCell: UITableViewCell {
     static let identifier = "MiniAppCell"
     
     // Название мини-приложения
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
@@ -30,7 +31,7 @@ class MiniAppCell: UITableViewCell {
     }()
     
     // Кнопка информации
-    private let infoButton: UIButton = {
+    let infoButton: UIButton = {
         let button = UIButton(type: .infoLight)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -90,7 +91,6 @@ class MiniAppCell: UITableViewCell {
         contentView.backgroundColor = UIColor(named: "primaryBackground")  // Применяем динамический цвет для фона
     }
 
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -127,9 +127,9 @@ class MiniAppCell: UITableViewCell {
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
         
-        // Кнопка "i" справа
+        // Кнопка "i" чуть левее
         NSLayoutConstraint.activate([
-            infoButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            infoButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),  // Смещаем кнопку левее
             infoButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
         
@@ -146,9 +146,8 @@ class MiniAppCell: UITableViewCell {
         ])
     }
 
-    
     // Показ/скрытие всплывающей подсказки
-    @objc private func infoButtonTapped() {
+    @objc private func infoButtonTapped(_ sender: UIButton) {
         isBubbleVisible.toggle()
         
         UIView.animate(withDuration: 0.3) {
@@ -162,7 +161,7 @@ class MiniAppCell: UITableViewCell {
             }
         }
     }
-    
+
     // Метод для скрытия подсказки
     private func hideDescriptionBubble() {
         if isBubbleVisible {
@@ -171,5 +170,14 @@ class MiniAppCell: UITableViewCell {
             }
             isBubbleVisible = false
         }
+    }
+    
+    // Переопределяем метод hitTest для точного определения области, на которую нажал пользователь
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let infoButtonPoint = infoButton.convert(point, from: self)
+        if infoButton.bounds.contains(infoButtonPoint) {
+            return infoButton  // Если касание произошло по кнопке, передаем его только ей
+        }
+        return super.hitTest(point, with: event)
     }
 }

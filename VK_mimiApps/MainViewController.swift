@@ -107,64 +107,61 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
+    // Теперь количество секций равно количеству мини-приложений
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return miniAppCount  // Каждая ячейка будет в отдельной секции
+    }
+
+    // В каждой секции только одна строка (ячейка)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return miniAppCount
+        return 1  // В каждой секции только одна строка
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MiniAppCell.identifier, for: indexPath) as! MiniAppCell
         
-        // Пример для игры Math Game
-        if indexPath.row == 0 {
+        // Проверка по `indexPath.section`, чтобы каждая секция отображала свое приложение
+        switch indexPath.section {
+        case 0:
             cell.configure(
                 with: "Math Game",
                 imageName: "MathImg",  // Имя изображения из ассетов
-                description: "\n Solve math problems by adding three numbers together! \n",
+                description: " Solve math problems by adding three numbers together! ",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
-        }
-        // Пример для игры Fifteen Puzzle
-        else if indexPath.row == 1 {
+        case 1:
             cell.configure(
                 with: "Fifteen Puzzle",
                 imageName: "FifteenImg",  // Имя изображения из ассетов
-                description: "\n Arrange the numbers in order by sliding them into the empty space. \n",
+                description: " Arrange the numbers in order by sliding them into the empty space. ",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
-        }
-        // Пример для игры Tic Tac Toe
-        else if indexPath.row == 2 {
+        case 2:
             cell.configure(
                 with: "Tic Tac Toe",
                 imageName: "TicTacToeImg",  // Имя изображения из ассетов
-                description: "\n Play a classic game of Tic Tac Toe against another player! \n",
+                description: " Play a classic game of Tic Tac Toe against another player! ",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
-        }
-        // Приложение Current City
-        else if indexPath.row == 3 {
+        case 3:
             cell.configure(
                 with: "Current City",
                 imageName: "CurrentCityImg",  // Имя изображения из ассетов
-                description: "\n Find out your current city and view it on the map! \n",
+                description: " Find out your current city and view it on the map! ",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
-        }
-        // Приложение Weather
-        else if indexPath.row == 4 {
+        case 4:
             cell.configure(
                 with: "Weather",
                 imageName: "WeatherImg",  // Имя изображения из ассетов
-                description: "\n Get the current weather forecast for your location! \n",
+                description: " Get the current weather forecast for your location! ",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
-        }
-        // Остальные мини-приложения
-        else {
+        default:
             cell.configure(
-                with: "Mini App \(indexPath.row + 1)",
+                with: "Mini App \(indexPath.section + 1)",
                 imageName: "DefaultImage",  // Замените это на любое другое изображение
-                description: "Description for Mini App \(indexPath.row + 1)",
+                description: "Description for Mini App \(indexPath.section + 1)",
                 isInteractive: isInteractiveMode  // Интерактивность зависит от режима
             )
         }
@@ -182,26 +179,44 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    // Настройка высоты футера для создания отступов между секциями
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10  // Высота отступа между секциями
+    }
+
+    // Создаем кастомный `UIView` для футера секции
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = .clear  // Можно сделать его прозрачным для создания визуального отступа
+        return footerView
+    }
+
+    // Убираем заголовки секций
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01  // Минимальная высота заголовка секции, чтобы убрать отступ
+    }
+
     // Обработка нажатия на ячейку
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isInteractiveMode {
-            if indexPath.row == 0 {
+            switch indexPath.section {
+            case 0:
                 let mathGameVC = MathGameViewController()
                 navigationController?.pushViewController(mathGameVC, animated: true)
-            } else if indexPath.row == 1 {
+            case 1:
                 let fifteenGameVC = GameViewController()  // Инициализируем контроллер игры Fifteen Puzzle
                 navigationController?.pushViewController(fifteenGameVC, animated: true)
-            } else if indexPath.row == 2 {
+            case 2:
                 let ticTacToeVC = TicTacToeViewController()  // Инициализируем контроллер игры Tic Tac Toe
                 navigationController?.pushViewController(ticTacToeVC, animated: true)
-            } else if indexPath.row == 3 {
+            case 3:
                 let currentCityVC = CurrentCityViewController()  // Инициализируем контроллер Current City
                 navigationController?.pushViewController(currentCityVC, animated: true)
-            } else if indexPath.row == 4 {
+            case 4:
                 let weatherVC = WeatherViewController()  // Инициализируем контроллер Weather
                 navigationController?.pushViewController(weatherVC, animated: true)
-            } else {
-                print("Tapped on Mini App \(indexPath.row + 1)")
+            default:
+                print("Tapped on Mini App \(indexPath.section + 1)")
             }
             
             // Снимаем выделение сразу после того, как пользователь отпустит ячейку
