@@ -1,0 +1,51 @@
+{
+  "originHash" : "210dd9bc28159c4eab22427f0c0e515d7830f1d6c95ca60970a13e5f51932f49",
+  "pins" : [
+    {
+      "identity" : "currentcity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JessiePinkMann/CurrentCity",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ce7d6e0763d1e50e04b17bac0d8fe5cb1fb69ea6"
+      }
+    },
+    {
+      "identity" : "fifteengame",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JessiePinkMann/FifteenGame",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5d5cffc71db8102c0ffa8ad1ecd7c06df6d76963"
+      }
+    },
+    {
+      "identity" : "mathgame",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JessiePinkMann/MathGame.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "40167eb14be05b5315543c3c844270eb306ffdb7"
+      }
+    },
+    {
+      "identity" : "tictactoe",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JessiePinkMann/TicTacToe.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "dca676d950e23518d7f837294b1540e6411b895a"
+      }
+    },
+    {
+      "identity" : "weather",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JessiePinkMann/weather",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ef928c833485e63279ab37e0ace487ed801a7dc8"
+      }
+    }
+  ],
+  "version" : 3
+}
