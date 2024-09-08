@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import Weather
+import CurrentCity
+import TicTacToe
+import Fifteen
+import MathGame
 
 class MainViewController: UIViewController {
 
